@@ -113,6 +113,7 @@
                     <strong>@yield('title', 'Ruang belajar')</strong>
                 </div>
                 <div class="vl-topbar-actions">
+                    <x-jakarta-clock variant="virtulab" />
                     <span class="vl-online"><span></span> LAB ONLINE</span>
                     <a href="{{ route('virtulab.index') }}" class="hidden rounded-xl border border-[#dce8e1] bg-[#edf6f0] px-3 py-2 text-xs font-bold text-[#347d6d] transition hover:bg-[#dff0e6] sm:inline-flex sm:items-center sm:gap-1.5">
                         <i class="vl-icon vl-icon-lab"></i> Ruang 3D

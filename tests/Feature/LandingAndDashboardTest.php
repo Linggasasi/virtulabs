@@ -39,6 +39,7 @@ class LandingAndDashboardTest extends TestCase
         $response->assertSee('Laboratorium Kimia');
         $response->assertSee('Laboratorium Biologi');
         $response->assertSee(route('register'));
+        $response->assertSee('data-jakarta-clock', false);
     }
 
     public function test_dashboard_redirects_students_and_administrators_to_their_own_area(): void
@@ -107,6 +108,7 @@ class LandingAndDashboardTest extends TestCase
         $response->assertOk();
         $response->assertSee('Progres pembelajaran');
         $response->assertSee('Riwayat evaluasi');
+        $response->assertSee('data-jakarta-clock', false);
         $response->assertViewHas('statistics', function (array $statistics): bool {
             return $statistics['experimentsCompleted'] === 1
                 && $statistics['quizzesTaken'] === 1;
@@ -139,6 +141,7 @@ class LandingAndDashboardTest extends TestCase
         $response->assertSee(route('admin.users.index'));
         $response->assertSee(route('admin.materials.index'));
         $response->assertSee(route('admin.experiments.index'));
+        $response->assertSee('data-jakarta-clock', false);
         $response->assertViewHas('statistics', function (array $statistics): bool {
             return $statistics['students'] === 1
                 && $statistics['administrators'] === 1

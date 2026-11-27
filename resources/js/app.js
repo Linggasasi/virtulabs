@@ -1,3 +1,7 @@
+import { initializeJakartaClocks } from './jakarta-clock';
+
+initializeJakartaClocks();
+
 const menuButton = document.querySelector('#mobile-menu-button');
 const mobileMenu = document.querySelector('#mobile-menu');
 

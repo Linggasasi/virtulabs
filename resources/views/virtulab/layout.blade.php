@@ -49,6 +49,7 @@
                 <button class="vl-mobile-menu" id="vlMobileMenu" aria-label="Buka navigasi"><i class="vl-icon vl-icon-menu"></i></button>
                 <div class="vl-breadcrumb"><a href="{{ route('virtulab.index') }}">Workspace</a><span>›</span><strong>{{ $pageTitle ?? 'Dashboard' }}</strong></div>
                 <div class="vl-topbar-actions">
+                    <x-jakarta-clock variant="virtulab" />
                     <span class="vl-online"><span></span> LAB ONLINE</span>
                     <button class="vl-help-button" title="Informasi"><i class="vl-icon vl-icon-help"></i></button>
                 </div>

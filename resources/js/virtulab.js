@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import { initializeJakartaClocks } from './jakarta-clock';
+
+initializeJakartaClocks();
 
 (() => {
     const toast = (message) => {

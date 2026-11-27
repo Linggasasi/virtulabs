@@ -23,6 +23,8 @@
                 </span>
             </a>
 
+            <x-jakarta-clock />
+
             <div class="hidden items-center gap-8 md:flex">
                 <a href="#laboratorium" class="text-sm font-medium text-slate-600 transition hover:text-emerald-700">Laboratorium</a>
                 <a href="#cara-belajar" class="text-sm font-medium text-slate-600 transition hover:text-emerald-700">Cara belajar</a>
