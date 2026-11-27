@@ -17,6 +17,7 @@ class VirtuLabUiTest extends TestCase
         $response->assertSee('Gerak Parabola');
         $response->assertSee('Reaksi Asam–Basa');
         $response->assertSee('Rangkaian Listrik');
+
     }
 
     public function test_virtulab_lab_pages_render_for_valid_slugs_and_404_for_invalid_slug(): void

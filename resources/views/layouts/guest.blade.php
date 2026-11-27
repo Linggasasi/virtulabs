@@ -22,11 +22,6 @@
                     <span class="block text-[9px] font-bold tracking-[1.8px] text-[#71908b]">INTERACTIVE SCIENCE LAB</span>
                 </span>
             </a>
-
-            <div class="hidden items-center gap-7 md:flex">
-                <a href="#laboratorium" class="text-[13px] font-semibold text-[#526e68] transition hover:text-[#347f70]">Laboratorium</a>
-                <a href="{{ route('virtulab.index') }}" class="text-[13px] font-semibold text-[#526e68] transition hover:text-[#347f70]">Simulasi 3D</a>
-                <a href="#cara-belajar" class="text-[13px] font-semibold text-[#526e68] transition hover:text-[#347f70]">Cara belajar</a>
             </div>
 
             <div class="hidden items-center gap-2.5 md:flex">
