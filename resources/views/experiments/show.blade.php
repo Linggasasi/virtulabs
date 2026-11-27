@@ -3,44 +3,81 @@
 @section('title', $experiment->title)
 
 @section('content')
-    <article class="mx-auto max-w-4xl">
-        <a href="{{ route('laboratories.show', $experiment->laboratory->slug) }}" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-blue-700">
-            <span aria-hidden="true">←</span> {{ $experiment->laboratory->name }}
-        </a>
+    @php
+        $simSlug = match ($experiment->laboratory->slug) {
+            'fisika' => 'physics',
+            'kimia' => 'chemistry',
+            default => null,
+        };
+    @endphp
 
-        <header class="mt-6 rounded-3xl bg-slate-950 px-6 py-8 sm:px-10 sm:py-10">
-            <p class="text-xs font-bold uppercase tracking-[0.16em] text-blue-300">Panduan eksperimen · {{ $experiment->laboratory->name }}</p>
-            <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">{{ $experiment->title }}</h1>
+    <div class="vl-lab-heading">
+        <div>
+            <a class="vl-back-link" href="{{ route('laboratories.show', $experiment->laboratory->slug) }}">
+                <i class="vl-icon vl-icon-arrow-left"></i> {{ $experiment->laboratory->name }}
+            </a>
+            <div class="vl-eyebrow"><span class="vl-eyebrow-line"></span>PANDUAN EKSPERIMEN · {{ strtoupper($experiment->laboratory->slug) }}</div>
+            <h1>{{ $experiment->title }}</h1>
             @if ($experiment->description)
-                <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">{{ $experiment->description }}</p>
+                <p class="vl-lead">{{ $experiment->description }}</p>
             @endif
-            @if ($experiment->material)
-                <a href="{{ route('materials.show', $experiment->material) }}" class="mt-5 inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
-                    Baca materi: {{ $experiment->material->title }} <span aria-hidden="true">→</span>
-                </a>
+        </div>
+    </div>
+
+    <div class="vl-theory-layout">
+        <article class="vl-theory-main">
+            <div class="vl-content-kicker">INSTRUKSI PRAKTIKUM</div>
+            <h2>Langkah dan instruksi</h2>
+
+            @if ($experiment->objectives)
+                <div class="vl-objective-box">
+                    <span class="vl-objective-icon"><i class="vl-icon vl-icon-target"></i></span>
+                    <div>
+                        <strong>Tujuan eksperimen</strong>
+                        <p class="whitespace-pre-line">{{ $experiment->objectives }}</p>
+                    </div>
+                </div>
             @endif
-        </header>
 
-        @if ($experiment->objectives)
-            <section class="mt-6 rounded-2xl border border-blue-100 bg-blue-50/70 p-6 sm:p-8">
-                <h2 class="font-semibold text-blue-950">Tujuan eksperimen</h2>
-                <p class="mt-3 whitespace-pre-line text-sm leading-7 text-blue-950/80">{{ $experiment->objectives }}</p>
-            </section>
-        @endif
-
-        <section class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 sm:p-9">
-            <h2 class="text-lg font-semibold text-slate-950">Langkah dan instruksi</h2>
             @if ($experiment->instructions)
-                <div class="mt-5 whitespace-pre-line text-sm leading-7 text-slate-700 sm:text-base">{{ $experiment->instructions }}</div>
+                <div class="vl-theory-intro whitespace-pre-line">{{ $experiment->instructions }}</div>
             @else
-                <p class="mt-3 text-sm leading-6 text-slate-500">Panduan langkah eksperimen belum ditambahkan.</p>
+                <p class="mt-3 text-sm text-[#7d9294]">Panduan langkah eksperimen belum ditambahkan.</p>
             @endif
-        </section>
 
-        @if (! $experiment->objectives && ! $experiment->instructions)
-            <p class="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900" role="status">
-                Panduan ini masih disiapkan. Kembali ke laboratorium untuk memilih materi lain.
-            </p>
-        @endif
-    </article>
+            @if (! $experiment->objectives && ! $experiment->instructions)
+                <p class="mt-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900" role="status">
+                    Panduan ini masih disiapkan. Kembali ke laboratorium untuk memilih materi lain.
+                </p>
+            @endif
+        </article>
+
+        <aside class="vl-theory-aside">
+            @if ($experiment->material)
+                <div class="vl-formula-card">
+                    <div class="vl-aside-heading">
+                        <span class="vl-aside-icon"><i class="vl-icon vl-icon-book"></i></span>
+                        <span><strong>Materi pendukung</strong><small>Referensi teori</small></span>
+                    </div>
+                    <div class="vl-formula-row">
+                        <small>Pelajari konsep sebelum praktik</small>
+                        <a href="{{ route('materials.show', $experiment->material) }}" class="vl-arrow-link mt-1">
+                            Baca materi: {{ $experiment->material->title }} <i class="vl-icon vl-icon-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            @endif
+
+            <div class="vl-info-card">
+                <i class="vl-icon vl-icon-lab"></i>
+                <div>
+                    <strong>Simulasi 3D Interaktif</strong>
+                    <p>Coba langsung ruang praktik virtual 3D untuk mengamati eksperimen secara visual.</p>
+                    <a href="{{ $simSlug ? route('virtulab.lab', $simSlug) : route('virtulab.index') }}" class="vl-button vl-button-primary vl-full">
+                        Buka ruang praktik 3D <i class="vl-icon vl-icon-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
 @endsection

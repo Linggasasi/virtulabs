@@ -12,9 +12,13 @@ use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
+use App\Http\Controllers\VirtuLabController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', LandingPageController::class)->name('home');
+
+Route::get('/virtulab', [VirtuLabController::class, 'index'])->name('virtulab.index');
+Route::get('/virtulab/lab/{slug}', [VirtuLabController::class, 'show'])->name('virtulab.lab');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
